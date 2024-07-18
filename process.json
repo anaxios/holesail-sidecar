@@ -1,0 +1,7 @@
+{
+  "apps" : [{
+    "name"       : "server",
+    "cwd"         : "/temp/server",
+    "script"     : "/temp/server/server.js"
+  }]
+}
