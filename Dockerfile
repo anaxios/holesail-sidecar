@@ -1,6 +1,6 @@
 FROM node:lts-slim AS base
 
-RUN npm install -g pm2@latest holesail 
+RUN npm install -g pm2@latest holesail dotenv 
 
 FROM base AS prod
 
