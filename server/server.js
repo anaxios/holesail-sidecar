@@ -15,6 +15,13 @@ app.get("/api/v1/connector_string", (c) => {
   return c.text(connector);
 });
 
+app.get("/api/v1/random/:count?", async (c) => {
+  const count = Math.min(Math.floor(Math.abs(c.req.param("count"))), 1000) || 6;
+  // const count = c.req.param("count") || 16;
+
+  return c.text(await roll(count));
+});
+
 serve({
   fetch: app.fetch,
   port: 8787,
