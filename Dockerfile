@@ -19,7 +19,7 @@ EXPOSE 8787
 
 COPY server /temp/server
 WORKDIR /temp/server
-RUN npm install hono @hono/node-server
+RUN npm i
 
 COPY app /temp/app 
 COPY process.json /temp
