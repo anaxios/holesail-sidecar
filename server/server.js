@@ -15,12 +15,12 @@ app.get("/api/v1/connector_string", (c) => {
   return c.text(connector);
 });
 
-app.get("/api/v1/random/:count?", async (c) => {
-  const count = Math.min(Math.floor(Math.abs(c.req.param("count"))), 1000) || 6;
-  // const count = c.req.param("count") || 16;
+// app.get("/api/v1/random/:count?", async (c) => {
+//   const count = Math.min(Math.floor(Math.abs(c.req.param("count"))), 1000) || 6;
+//   // const count = c.req.param("count") || 16;
 
-  return c.text(await roll(count));
-});
+//   return c.text(await roll(count));
+// });
 
 serve({
   fetch: app.fetch,
@@ -28,8 +28,10 @@ serve({
 });
 
 async function createConnection(port, name) {
-  const connector = await roll(16); //await randomHexString(); //generateRandomString(128);
-
+  const res = await fetch(
+    `https://random.daedalist.net/api/random/16/token/${process.env.RANDOM_ORG_API_KEY}`
+  ); //roll(16); //await randomHexString(); //generateRandomString(128);
+  const connector = await res.text();
   // Start PM2 process for the new connection
   const pm2cmd = `pm2 start holesail --name ${name} -- --live ${port} --host ${name} --connector "${connector}"`;
   try {
